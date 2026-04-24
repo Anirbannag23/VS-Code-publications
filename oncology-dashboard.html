@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Oncology Market Dashboard 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060a12;
+    --surface: #0d1520;
+    --surface2: #111d2e;
+    --border: #1a2d45;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6e;
+    --accent4: #c77dff;
+    --accent5: #ffd166;
+    --text: #e8f4fd;
+    --muted: #6b8ba4;
+    --danger: #ff4757;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── GRID NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 10% 20%, rgba(0,212,255,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 90% 80%, rgba(199,125,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .header-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .header-left h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-left p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .header-right {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .badge span { color: var(--accent); font-size: 14px; display: block; }
+
+  /* ── KPI ROW ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--kpi-color, var(--accent));
+  }
+
+  .kpi:hover { border-color: var(--kpi-color, var(--accent)); }
+
+  .kpi-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .kpi-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .kpi-sub .up { color: var(--accent3); }
+  .kpi-sub .down { color: var(--danger); }
+
+  /* ── MAIN GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .span2 { grid-column: span 2; }
+  .span3 { grid-column: span 3; }
+
+  @media (max-width: 900px) {
+    .grid, .grid-3 { grid-template-columns: 1fr; }
+    .span2, .span3 { grid-column: span 1; }
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── TOP PRODUCTS TABLE ── */
+  .drug-row {
+    display: grid;
+    grid-template-columns: 18px 1fr 80px 70px 40px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  .drug-row:hover { background: rgba(255,255,255,0.02); margin: 0 -18px; padding: 8px 18px; }
+  .drug-row:last-child { border-bottom: none; }
+
+  .drug-rank {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .drug-info .drug-name {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .drug-info .drug-meta {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .drug-bar-wrap {
+    position: relative;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .drug-bar {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    border-radius: 2px;
+    background: var(--bar-color, var(--accent));
+    animation: grow 1s ease-out both;
+  }
+
+  @keyframes grow {
+    from { width: 0 !important; }
+  }
+
+  .drug-rev {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    text-align: right;
+  }
+
+  .drug-change {
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    text-align: right;
+  }
+
+  /* ── COMPANY BUBBLES ── */
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .company-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    cursor: default;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .company-card:hover {
+    border-color: var(--company-color, var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .company-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 6px 6px 0 0;
+    background: var(--company-color, var(--accent));
+  }
+
+  .company-name {
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .company-rev {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--company-color, var(--accent));
+  }
+
+  .company-drugs {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── MODALITY CARDS ── */
+  .modality-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .modality-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .modality-card:hover {
+    border-color: var(--mod-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  }
+
+  .modality-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--mod-color, var(--accent));
+    opacity: 0.06;
+    transform: translate(20px, 20px);
+  }
+
+  .mod-icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .mod-name {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .mod-size {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--mod-color);
+    font-weight: 700;
+  }
+
+  .mod-cagr {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .mod-desc {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ── DONUT ── */
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  svg.donut { flex-shrink: 0; }
+
+  .donut-legend { flex: 1; min-width: 140px; }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .legend-row:last-child { border-bottom: none; }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-label { flex: 1; font-size: 11px; }
+  .legend-pct {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── PIPELINE BAR ── */
+  .pipeline-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .pipeline-label { font-size: 11px; color: var(--muted); }
+
+  .pipeline-track {
+    background: var(--border);
+    border-radius: 3px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .pipeline-fill {
+    height: 100%;
+    border-radius: 3px;
+    animation: grow 1.2s ease-out both;
+  }
+
+  .pipeline-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-align: right;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 14px 16px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 5px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--item-color, var(--accent));
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--item-color, var(--accent));
+    text-transform: uppercase;
+  }
+
+  .timeline-text {
+    font-size: 11px;
+    color: var(--text);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* ── REGIONAL MAP BARS ── */
+  .region-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 60px;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .region-row:last-child { border-bottom: none; }
+  .region-label { font-size: 11px; }
+
+  .region-track {
+    background: var(--border);
+    border-radius: 3px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .region-fill {
+    height: 100%;
+    border-radius: 3px;
+    animation: grow 1.2s ease-out both;
+  }
+
+  .region-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-align: right;
+  }
+
+  /* ── GROWTH CHART ── */
+  .growth-chart {
+    position: relative;
+    height: 90px;
+    margin-top: 8px;
+  }
+
+  .growth-chart svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .growth-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .growth-labels span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  /* ── DEAL ACTIVITY ── */
+  .deal-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .deal-row:last-child { border-bottom: none; }
+
+  .deal-badge {
+    font-size: 9px;
+    font-family: 'Space Mono', monospace;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    background: var(--deal-bg, rgba(0,212,255,0.1));
+    color: var(--deal-color, var(--accent));
+    border: 1px solid var(--deal-color, var(--accent));
+    flex-shrink: 0;
+  }
+
+  .deal-text { font-size: 11px; flex: 1; }
+  .deal-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent5);
+    white-space: nowrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.6;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'Space Mono', monospace;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .tag.green { background: rgba(127,255,110,0.08); border-color: rgba(127,255,110,0.2); color: var(--accent3); }
+  .tag.orange { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.2); color: var(--accent2); }
+  .tag.purple { background: rgba(199,125,255,0.08); border-color: rgba(199,125,255,0.2); color: var(--accent4); }
+  .tag.yellow { background: rgba(255,209,102,0.08); border-color: rgba(255,209,102,0.2); color: var(--accent5); }
+
+  .divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+  /* ── NAV BAR ── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6,10,18,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    margin: 0 -20px 24px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navbar::-webkit-scrollbar { display: none; }
+
+  .navbar::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--accent);
+    white-space: nowrap;
+    padding: 12px 16px 12px 0;
+    border-right: 1px solid var(--border);
+    margin-right: 4px;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.2s;
+    border: none;
+    background: none;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 14px; right: 14px;
+    height: 2px;
+    background: var(--nav-color, var(--accent));
+    border-radius: 2px 2px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-item:hover { color: var(--text); }
+  .nav-item:hover::after { transform: scaleX(1); }
+
+  .nav-item.active {
+    color: var(--nav-color, var(--accent));
+  }
+
+  .nav-item.active::after { transform: scaleX(1); }
+
+  .nav-icon { font-size: 13px; }
+
+  .nav-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    flex-shrink: 0;
+    margin: 0 4px;
+  }
+
+  .nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding-left: 12px;
+    border-left: 1px solid var(--border);
+  }
+
+  .nav-pill {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .nav-pill.live::before {
+    content: '●';
+    margin-right: 4px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Section highlight on scroll */
+  .section-anchor { scroll-margin-top: 52px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- NAV BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="nav-logo">⬡ OncoDB</div>
+    <button class="nav-item active" style="--nav-color:var(--accent)" data-target="overview">
+      <span class="nav-icon">📊</span> Overview
+    </button>
+    <button class="nav-item" style="--nav-color:var(--accent3)" data-target="top-products">
+      <span class="nav-icon">💊</span> Top Products
+    </button>
+    <button class="nav-item" style="--nav-color:#20e3b2" data-target="key-players">
+      <span class="nav-icon">🏢</span> Key Players
+    </button>
+    <button class="nav-item" style="--nav-color:var(--accent4)" data-target="modalities">
+      <span class="nav-icon">🧬</span> Modalities
+    </button>
+    <button class="nav-item" style="--nav-color:var(--accent5)" data-target="pipeline">
+      <span class="nav-icon">🔬</span> Pipeline &amp; Deals
+    </button>
+    <div class="nav-divider"></div>
+    <button class="nav-item" style="--nav-color:var(--accent2)" data-target="growth">
+      <span class="nav-icon">📈</span> Market Growth
+    </button>
+    <button class="nav-item" style="--nav-color:#f093fb" data-target="indications">
+      <span class="nav-icon">🎗️</span> Indications
+    </button>
+    <button class="nav-item" style="--nav-color:var(--danger)" data-target="risks">
+      <span class="nav-icon">⚠️</span> Risks
+    </button>
+    <div class="nav-right">
+      <span class="nav-pill live">FY 2025</span>
+      <span class="nav-pill" style="background:rgba(127,255,110,0.08);border-color:rgba(127,255,110,0.2);color:var(--accent3);">Q2 Data</span>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="overview" class="section-anchor">
+    <div class="header-left">
+      <h1>Global <em>Oncology</em> Market<br>Intelligence Dashboard</h1>
+      <p>FY 2025 · Data as of Q2 2025 · Sources: IQVIA, GlobalData, Evaluate Pharma, Company Filings</p>
+    </div>
+    <div class="header-right">
+      <div class="badge">TOTAL MARKET<span>~$243B</span></div>
+      <div class="badge">CAGR 2025–34<span>~10.8%</span></div>
+      <div class="badge">APPROVED NAS<br>(Last 5 Yrs)<span>132</span></div>
+    </div>
+  </header>
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi" style="--kpi-color: var(--accent)">
+      <div class="kpi-label">Global Market Size 2025</div>
+      <div class="kpi-value">$243B</div>
+      <div class="kpi-sub"><span class="up">↑ 11.5% YoY</span></div>
+    </div>
+    <div class="kpi" style="--kpi-color: var(--accent2)">
+      <div class="kpi-label">Projected 2034</div>
+      <div class="kpi-value">$668B</div>
+      <div class="kpi-sub">CAGR 10.8–11.5%</div>
+    </div>
+    <div class="kpi" style="--kpi-color: var(--accent3)">
+      <div class="kpi-label">Top Drug (Keytruda)</div>
+      <div class="kpi-value">$30B+</div>
+      <div class="kpi-sub"><span class="up">↑ ~18% YoY · 2025E</span></div>
+    </div>
+    <div class="kpi" style="--kpi-color: var(--accent4)">
+      <div class="kpi-label">ADC Market 2025</div>
+      <div class="kpi-value">$13.5B</div>
+      <div class="kpi-sub"><span class="up">↑ Fastest modality</span></div>
+    </div>
+    <div class="kpi" style="--kpi-color: var(--accent5)">
+      <div class="kpi-label">FDA-Approved ADCs</div>
+      <div class="kpi-value">15</div>
+      <div class="kpi-sub">As of mid-2025</div>
+    </div>
+    <div class="kpi" style="--kpi-color: #ff4757">
+      <div class="kpi-label">CAR-T Therapies</div>
+      <div class="kpi-value">7</div>
+      <div class="kpi-sub">FDA approved (2025)</div>
+    </div>
+    <div class="kpi" style="--kpi-color: #20e3b2">
+      <div class="kpi-label">Oncology Clinical Trials</div>
+      <div class="kpi-value">47.8K</div>
+      <div class="kpi-sub">Registered (Sep 2025)</div>
+    </div>
+    <div class="kpi" style="--kpi-color: #f093fb">
+      <div class="kpi-label">US Share of Spending</div>
+      <div class="kpi-value">46%</div>
+      <div class="kpi-sub">$89.4B in US alone</div>
+    </div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div id="top-products" class="section-anchor grid" style="grid-template-columns: 1.4fr 0.6fr; margin-bottom:16px;">
+
+    <!-- TOP 10 PRODUCTS -->
+    <div class="card">
+      <div class="card-title">Top 10 Oncology Products by 2025 Revenue (Est.)</div>
+
+      <!-- Header row -->
+      <div class="drug-row" style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); padding-bottom:6px;">
+        <span></span>
+        <span>Drug / Company</span>
+        <span style="text-align:right">Revenue</span>
+        <span></span>
+        <span style="text-align:right">YoY</span>
+      </div>
+
+      <!-- 1 Keytruda -->
+      <div class="drug-row">
+        <span class="drug-rank">1</span>
+        <div class="drug-info">
+          <div class="drug-name">Keytruda <span class="tag">PD-1</span></div>
+          <div class="drug-meta">Pembrolizumab · Merck &amp; Co · 40+ indications</div>
+        </div>
+        <div class="drug-rev">~$30B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:100%;--bar-color:var(--accent);animation-delay:.05s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+18%</div>
+      </div>
+
+      <!-- 2 Darzalex -->
+      <div class="drug-row">
+        <span class="drug-rank">2</span>
+        <div class="drug-info">
+          <div class="drug-name">Darzalex <span class="tag green">CD38</span></div>
+          <div class="drug-meta">Daratumumab · J&amp;J · Multiple Myeloma</div>
+        </div>
+        <div class="drug-rev">~$11B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:37%;--bar-color:#20e3b2;animation-delay:.1s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+14%</div>
+      </div>
+
+      <!-- 3 Opdivo -->
+      <div class="drug-row">
+        <span class="drug-rank">3</span>
+        <div class="drug-info">
+          <div class="drug-name">Opdivo <span class="tag">PD-1</span></div>
+          <div class="drug-meta">Nivolumab · BMS · Multiple solid tumors</div>
+        </div>
+        <div class="drug-rev">~$10B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:33%;--bar-color:#4fc3f7;animation-delay:.15s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+5%</div>
+      </div>
+
+      <!-- 4 Tagrisso -->
+      <div class="drug-row">
+        <span class="drug-rank">4</span>
+        <div class="drug-info">
+          <div class="drug-name">Tagrisso <span class="tag orange">EGFR TKI</span></div>
+          <div class="drug-meta">Osimertinib · AstraZeneca · NSCLC</div>
+        </div>
+        <div class="drug-rev">~$7.0B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:23%;--bar-color:var(--accent2);animation-delay:.2s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+9%</div>
+      </div>
+
+      <!-- 5 Xtandi -->
+      <div class="drug-row">
+        <span class="drug-rank">5</span>
+        <div class="drug-info">
+          <div class="drug-name">Xtandi <span class="tag orange">AR</span></div>
+          <div class="drug-meta">Enzalutamide · Pfizer/Astellas · Prostate Ca.</div>
+        </div>
+        <div class="drug-rev">~$6.5B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:22%;--bar-color:#ffab76;animation-delay:.25s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+4%</div>
+      </div>
+
+      <!-- 6 Enhertu -->
+      <div class="drug-row">
+        <span class="drug-rank">6</span>
+        <div class="drug-info">
+          <div class="drug-name">Enhertu <span class="tag purple">ADC</span></div>
+          <div class="drug-meta">Trastuzumab deruxtecan · AZ/Daiichi · HER2</div>
+        </div>
+        <div class="drug-rev">~$5.5B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:18%;--bar-color:var(--accent4);animation-delay:.3s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+65%</div>
+      </div>
+
+      <!-- 7 Verzenio -->
+      <div class="drug-row">
+        <span class="drug-rank">7</span>
+        <div class="drug-info">
+          <div class="drug-name">Verzenio <span class="tag orange">CDK4/6</span></div>
+          <div class="drug-meta">Abemaciclib · Eli Lilly · Breast Cancer</div>
+        </div>
+        <div class="drug-rev">~$5.3B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:18%;--bar-color:#ffd166;animation-delay:.35s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+28%</div>
+      </div>
+
+      <!-- 8 Tecvayli/Talvey/J&J -->
+      <div class="drug-row">
+        <span class="drug-rank">8</span>
+        <div class="drug-info">
+          <div class="drug-name">Calquence <span class="tag orange">BTKi</span></div>
+          <div class="drug-meta">Acalabrutinib · AstraZeneca · CLL/MCL</div>
+        </div>
+        <div class="drug-rev">~$3.5B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:12%;--bar-color:#80deea;animation-delay:.4s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+22%</div>
+      </div>
+
+      <!-- 9 Imfinzi -->
+      <div class="drug-row">
+        <span class="drug-rank">9</span>
+        <div class="drug-info">
+          <div class="drug-name">Imfinzi <span class="tag">PD-L1</span></div>
+          <div class="drug-meta">Durvalumab · AstraZeneca · Lung/biliary</div>
+        </div>
+        <div class="drug-rev">~$3.3B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:11%;--bar-color:#b0bec5;animation-delay:.45s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+18%</div>
+      </div>
+
+      <!-- 10 Pluvicto -->
+      <div class="drug-row">
+        <span class="drug-rank">10</span>
+        <div class="drug-info">
+          <div class="drug-name">Pluvicto <span class="tag yellow">RLT</span></div>
+          <div class="drug-meta">Lu-177 PSMA · Novartis · Prostate Cancer</div>
+        </div>
+        <div class="drug-rev">~$1.5B</div>
+        <div class="drug-bar-wrap"><div class="drug-bar" style="width:5%;--bar-color:var(--accent5);animation-delay:.5s"></div></div>
+        <div class="drug-change" style="color:var(--accent3)">+40%</div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Regional + Therapy split -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- REGIONAL BREAKDOWN -->
+      <div class="card">
+        <div class="card-title">Regional Market Share 2025</div>
+        <div class="region-row">
+          <div class="region-label">🇺🇸 North America</div>
+          <div class="region-track"><div class="region-fill" style="width:46%;background:var(--accent)"></div></div>
+          <div class="region-val" style="color:var(--accent)">46%</div>
+        </div>
+        <div class="region-row">
+          <div class="region-label">🇪🇺 Europe</div>
+          <div class="region-track"><div class="region-fill" style="width:22%;background:var(--accent4)"></div></div>
+          <div class="region-val" style="color:var(--accent4)">22%</div>
+        </div>
+        <div class="region-row">
+          <div class="region-label">🌏 Asia Pacific</div>
+          <div class="region-track"><div class="region-fill" style="width:18%;background:var(--accent3)"></div></div>
+          <div class="region-val" style="color:var(--accent3)">18%</div>
+        </div>
+        <div class="region-row">
+          <div class="region-label">🌎 Latin America</div>
+          <div class="region-track"><div class="region-fill" style="width:6%;background:var(--accent2)"></div></div>
+          <div class="region-val" style="color:var(--accent2)">6.3%</div>
+        </div>
+        <div class="region-row">
+          <div class="region-label">🌍 MEA</div>
+          <div class="region-track"><div class="region-fill" style="width:4%;background:var(--accent5)"></div></div>
+          <div class="region-val" style="color:var(--accent5)">4.4%</div>
+        </div>
+        <div class="region-row">
+          <div class="region-label">🇮🇳 India</div>
+          <div class="region-track"><div class="region-fill" style="width:2.4%;background:#a8edea"></div></div>
+          <div class="region-val" style="color:#a8edea">2.4%</div>
+        </div>
+      </div>
+
+      <!-- THERAPY MIX DONUT -->
+      <div class="card" style="flex:1;">
+        <div class="card-title">Treatment Type Split</div>
+        <div class="donut-wrap">
+          <svg class="donut" width="90" height="90" viewBox="0 0 36 36">
+            <!-- Targeted 38% -->
+            <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--accent)" stroke-width="4.5"
+              stroke-dasharray="38 62" stroke-dashoffset="25" transform="rotate(-90 18 18)"/>
+            <!-- Immunotherapy 28% -->
+            <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--accent4)" stroke-width="4.5"
+              stroke-dasharray="28 72" stroke-dashoffset="-13" transform="rotate(-90 18 18)"/>
+            <!-- Chemo 22% -->
+            <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--accent2)" stroke-width="4.5"
+              stroke-dasharray="22 78" stroke-dashoffset="-41" transform="rotate(-90 18 18)"/>
+            <!-- Hormonal 12% -->
+            <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--accent5)" stroke-width="4.5"
+              stroke-dasharray="12 88" stroke-dashoffset="-63" transform="rotate(-90 18 18)"/>
+            <text x="18" y="20" text-anchor="middle" font-size="5" fill="var(--muted)" font-family="'Space Mono',monospace">2025</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="legend-row">
+              <div class="legend-dot" style="background:var(--accent)"></div>
+              <div class="legend-label">Targeted Therapy</div>
+              <div class="legend-pct">38%</div>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background:var(--accent4)"></div>
+              <div class="legend-label">Immunotherapy</div>
+              <div class="legend-pct">28%</div>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background:var(--accent2)"></div>
+              <div class="legend-label">Chemotherapy</div>
+              <div class="legend-pct">22%</div>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background:var(--accent5)"></div>
+              <div class="legend-label">Hormonal</div>
+              <div class="legend-pct">12%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY PLAYERS -->
+  <div id="key-players" class="card section-anchor" style="margin-bottom:16px;">
+    <div class="card-title">Key Players — Oncology Portfolio Snapshot 2025</div>
+    <div class="company-grid">
+      <div class="company-card" style="--company-color:var(--accent)">
+        <div class="company-name">Merck &amp; Co.</div>
+        <div class="company-rev">~$30B+ onco</div>
+        <div class="company-drugs">Keytruda (pembrolizumab), MK-6482, sacituzumab tirumotecan</div>
+      </div>
+      <div class="company-card" style="--company-color:#4fc3f7">
+        <div class="company-name">Bristol-Myers Squibb</div>
+        <div class="company-rev">~$10B+ onco</div>
+        <div class="company-drugs">Opdivo, Yervoy, Breyanzi, Revlimid (declining)</div>
+      </div>
+      <div class="company-card" style="--company-color:var(--accent2)">
+        <div class="company-name">AstraZeneca</div>
+        <div class="company-rev">~$22B+ onco</div>
+        <div class="company-drugs">Tagrisso, Enhertu, Calquence, Imfinzi, Lynparza, Datroway</div>
+      </div>
+      <div class="company-card" style="--company-color:#20e3b2">
+        <div class="company-name">Johnson &amp; Johnson</div>
+        <div class="company-rev">~$18B+ onco</div>
+        <div class="company-drugs">Darzalex, Tecvayli, Talvey, Carvykti (CAR-T), Imbruvica</div>
+      </div>
+      <div class="company-card" style="--company-color:var(--accent4)">
+        <div class="company-name">Roche / Genentech</div>
+        <div class="company-rev">~$16B+ onco</div>
+        <div class="company-drugs">Kadcyla, Polivy, Tecentriq, Phesgo, Lunsumio</div>
+      </div>
+      <div class="company-card" style="--company-color:var(--accent5)">
+        <div class="company-name">Novartis</div>
+        <div class="company-rev">~$10B onco</div>
+        <div class="company-drugs">Pluvicto (RLT), Lutathera, Kymriah (CAR-T), Kisqali, Jakavi</div>
+      </div>
+      <div class="company-card" style="--company-color:#ffd166">
+        <div class="company-name">Eli Lilly</div>
+        <div class="company-rev">~$8B onco</div>
+        <div class="company-drugs">Verzenio, Retevmo, Jaypirca; $5B ADC mfg investment 2025</div>
+      </div>
+      <div class="company-card" style="--company-color:#ff4757">
+        <div class="company-name">Pfizer</div>
+        <div class="company-rev">~$12B onco</div>
+        <div class="company-drugs">Ibrance, Xtandi (co.), Adcetris, Elrexfio, Padcev (ADC)</div>
+      </div>
+      <div class="company-card" style="--company-color:#a8edea">
+        <div class="company-name">AbbVie</div>
+        <div class="company-rev">~$6B onco</div>
+        <div class="company-drugs">Imbruvica (declining), Venclexta, Elahere (ADC/ImmunoGen)</div>
+      </div>
+      <div class="company-card" style="--company-color:#f093fb">
+        <div class="company-name">Daiichi Sankyo</div>
+        <div class="company-rev">ADC leader</div>
+        <div class="company-drugs">Enhertu, Datroway, ifinatamab deruxtecan; $22B AZ deal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW: MODALITIES + PIPELINE -->
+  <div id="modalities" class="section-anchor grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:16px;">
+
+    <!-- EMERGING MODALITIES -->
+    <div class="card">
+      <div class="card-title">Emerging Therapeutic Modalities</div>
+      <div class="modality-grid">
+
+        <div class="modality-card" style="--mod-color:var(--accent4)">
+          <div class="mod-icon">🎯</div>
+          <div class="mod-name">Antibody-Drug Conjugates</div>
+          <div class="mod-size">$13.5B</div>
+          <div class="mod-cagr">CAGR ~9–10% → $33B by 2035</div>
+          <div class="mod-desc">15 FDA-approved ADCs. Fastest-growing modality — 284 new oncology trials in 2024. Enhertu commands 23% of ADC market. "Biological missiles" replacing chemo.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:var(--accent5)">
+          <div class="mod-icon">☢️</div>
+          <div class="mod-name">Radioligand Therapy</div>
+          <div class="mod-size">~$2.5B</div>
+          <div class="mod-cagr">Trial starts tripled 2020–2024</div>
+          <div class="mod-desc">Pluvicto (lutetium-177 PSMA) leading; Lutathera for NETs. Novartis dominant. 4 major RLT deals &gt;$1B each in H1 2024. Expanding beyond prostate cancer.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:var(--accent2)">
+          <div class="mod-icon">🧬</div>
+          <div class="mod-name">CAR-T Cell Therapy</div>
+          <div class="mod-size">~$3B</div>
+          <div class="mod-cagr">Projected $14B by 2029</div>
+          <div class="mod-desc">7 FDA-approved CAR-T therapies (Jan 2025). Leaders: Kymriah, Yescarta, Breyanzi, Carvykti. J&amp;J Phase II/III next-gen CAR-T for DLBCL started Jan 2025.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:var(--accent3)">
+          <div class="mod-icon">🔗</div>
+          <div class="mod-name">Bispecific Antibodies</div>
+          <div class="mod-size">$9B</div>
+          <div class="mod-cagr">3 new FDA approvals in 2024</div>
+          <div class="mod-desc">~250 new trials started in 2024, up 256% since 2019. Tecvayli, Talvey, Elrexfio in myeloma. CD3×CD20 and BCMA targets leading. Bridging T cells to tumors.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:var(--accent)">
+          <div class="mod-icon">🛡️</div>
+          <div class="mod-name">Checkpoint Inhibitors</div>
+          <div class="mod-size">$55B+</div>
+          <div class="mod-cagr">Dominant; biosimilar risk 2028+</div>
+          <div class="mod-desc">PD-1/PD-L1 maintains absolute dominance. Keytruda approved for 49 US indications. Biosimilar pressure expected 2028 at Keytruda's patent cliff.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:#f093fb">
+          <div class="mod-icon">✂️</div>
+          <div class="mod-name">CRISPR / Gene Therapy</div>
+          <div class="mod-size">Emerging</div>
+          <div class="mod-cagr">Viral vector mfg CAGR 24.6%</div>
+          <div class="mod-desc">Base editing trials ongoing (Beam Therapeutics). CRISPR-Cas9 enabling targeted cancer cell modification. Clinical translation accelerating in hematologic malignancies.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:#20e3b2">
+          <div class="mod-icon">💊</div>
+          <div class="mod-name">PARP Inhibitors</div>
+          <div class="mod-size">~$4B</div>
+          <div class="mod-cagr">BRCA-mutated tumors focus</div>
+          <div class="mod-desc">Lynparza (olaparib, AZ/MSD), Zejula, Talzenna in breast/ovarian. Now expanding into prostate cancer. Combination with immunotherapy being explored.</div>
+        </div>
+
+        <div class="modality-card" style="--mod-color:#ffab76">
+          <div class="mod-icon">🤖</div>
+          <div class="mod-name">AI-Driven Drug Design</div>
+          <div class="mod-size">Accelerating</div>
+          <div class="mod-cagr">Reshaping discovery timelines</div>
+          <div class="mod-desc">AI used in biomarker identification, target discovery and clinical trial optimization. Chinese biopharma executed $30B in oncology licensing in 2024, accelerating AI-driven pipelines.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE + DEALS -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- ADC PIPELINE BREAKDOWN -->
+      <div class="card">
+        <div class="card-title">ADC Pipeline by Cancer Type (Trials)</div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Breast Cancer</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:100%;background:var(--accent4)"></div></div>
+          <div class="pipeline-num" style="color:var(--accent4)">~44%</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Lung Cancer</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:70%;background:var(--accent2)"></div></div>
+          <div class="pipeline-num" style="color:var(--accent2)">Fast ↑</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Hematologic</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:55%;background:var(--accent)"></div></div>
+          <div class="pipeline-num" style="color:var(--accent)">Mature</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Gastric / GI</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:35%;background:var(--accent5)"></div></div>
+          <div class="pipeline-num" style="color:var(--accent5)">CLDN18</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Ovarian</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:30%;background:#20e3b2"></div></div>
+          <div class="pipeline-num" style="color:#20e3b2">Growing</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-label">Prostate</div>
+          <div class="pipeline-track"><div class="pipeline-fill" style="width:25%;background:#f093fb"></div></div>
+          <div class="pipeline-num" style="color:#f093fb">PSMA</div>
+        </div>
+        <div style="margin-top:10px; padding: 8px; background: rgba(199,125,255,0.06); border:1px solid rgba(199,125,255,0.15); border-radius:4px; font-size:10px; color:var(--muted);">
+          284 new ADC oncology trials started in 2024 — ~100 more than 2023. ADCs account for ~80% of oncology deal value in 2023–24.
+        </div>
+      </div>
+
+      <!-- M&A / DEAL ACTIVITY -->
+      <div class="card" style="flex:1;">
+        <div class="card-title">Notable M&amp;A &amp; Deal Activity</div>
+
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent4);--deal-bg:rgba(199,125,255,0.1)">ACQUISITION</div>
+          <div class="deal-text">AbbVie acquires ImmunoGen (Elahere ADC for ovarian Ca.)</div>
+          <div class="deal-val">$10B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent2);--deal-bg:rgba(255,107,53,0.1)">ACQUISITION</div>
+          <div class="deal-text">Pfizer acquires Seagen (ADC platform, Adcetris, Padcev)</div>
+          <div class="deal-val">$43B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent3);--deal-bg:rgba(127,255,110,0.1)">PARTNERSHIP</div>
+          <div class="deal-text">AstraZeneca × Daiichi Sankyo (3 ADC assets pipeline)</div>
+          <div class="deal-val">$22B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent);--deal-bg:rgba(0,212,255,0.1)">PARTNERSHIP</div>
+          <div class="deal-text">Merck × Daiichi Sankyo (3 ADC assets, ifinatamab DXd)</div>
+          <div class="deal-val">$22B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent5);--deal-bg:rgba(255,209,102,0.1)">LICENSING</div>
+          <div class="deal-text">Chinese biopharma oncology licensing deals (2024)</div>
+          <div class="deal-val">$30B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:#20e3b2;--deal-bg:rgba(32,227,178,0.1)">INVESTMENT</div>
+          <div class="deal-text">Eli Lilly ADC manufacturing buildout (2025)</div>
+          <div class="deal-val">$5B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:#f093fb;--deal-bg:rgba(240,147,251,0.1)">FUNDING</div>
+          <div class="deal-text">Solve Therapeutics ADC pipeline (Series A, 2025)</div>
+          <div class="deal-val">$120M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW: MARKET GROWTH PROJECTION + RECENT EVENTS -->
+  <div id="growth" class="section-anchor grid" style="grid-template-columns:1fr 1fr; margin-bottom:16px;">
+
+    <!-- MARKET SIZE PROJECTION -->
+    <div class="card">
+      <div class="card-title">Global Oncology Market Size Projection ($B)</div>
+      <div class="growth-chart">
+        <svg viewBox="0 0 400 90" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="10" x2="400" y2="10" stroke="var(--border)" stroke-width="1"/>
+          <line x1="0" y1="30" x2="400" y2="30" stroke="var(--border)" stroke-width="1"/>
+          <line x1="0" y1="50" x2="400" y2="50" stroke="var(--border)" stroke-width="1"/>
+          <line x1="0" y1="70" x2="400" y2="70" stroke="var(--border)" stroke-width="1"/>
+
+          <!-- Y-axis labels -->
+          <text x="2" y="9" font-size="7" fill="var(--muted)" font-family="'Space Mono',monospace">$668B</text>
+          <text x="2" y="29" font-size="7" fill="var(--muted)" font-family="'Space Mono',monospace">$500B</text>
+          <text x="2" y="49" font-size="7" fill="var(--muted)" font-family="'Space Mono',monospace">$345B</text>
+          <text x="2" y="69" font-size="7" fill="var(--muted)" font-family="'Space Mono',monospace">$190B</text>
+
+          <!-- Area fill: 2022=190, 2023=220, 2024=243, 2025=280, 2026=310, 2027=355, 2028=405, 2029=460, 2030=515, 2034=668 -->
+          <!-- map: 190→70, 668→10. range=478 over 60px. (val-190)*60/478 subtracted from 70 -->
+          <!-- x: 2022=55, 2024=110, 2025=137, 2026=165, 2027=192, 2028=220, 2029=247, 2030=275, 2034=370 -->
+          <path d="M55,70 L90,67 L110,64 L137,58 L165,52 L192,45 L220,37 L247,30 L275,23 L370,10 L400,8 L400,90 L55,90 Z"
+                fill="url(#chartGrad)"/>
+          <polyline points="55,70 90,67 110,64 137,58 165,52 192,45 220,37 247,30 275,23 370,10 400,8"
+                    fill="none" stroke="var(--accent)" stroke-width="2"/>
+
+          <!-- Dots at key years -->
+          <circle cx="137" cy="58" r="3" fill="var(--accent)"/>
+          <circle cx="370" cy="10" r="3" fill="var(--accent4)"/>
+
+          <!-- Labels -->
+          <text x="133" y="53" font-size="7" fill="var(--accent)" font-family="'Space Mono',monospace" text-anchor="middle">$243B</text>
+          <text x="370" y="7" font-size="7" fill="var(--accent4)" font-family="'Space Mono',monospace" text-anchor="middle">$668B</text>
+
+          <!-- NOW marker -->
+          <line x1="137" y1="10" x2="137" y2="80" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="138" y="82" font-size="7" fill="var(--accent)" font-family="'Space Mono',monospace">NOW</text>
+        </svg>
+      </div>
+      <div class="growth-labels">
+        <span>2022</span><span>2024</span><span>2025</span><span>2026</span><span>2027</span><span>2028</span><span>2029</span><span>2030</span><span>2034</span>
+      </div>
+      <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div style="font-size:10px; color:var(--muted);">Drug spending CAGR 2020–24: <span style="color:var(--accent3)">11.9%/yr</span></div>
+        <div style="font-size:10px; color:var(--muted);">New modalities hit <span style="color:var(--accent)">$37B</span> est. by 2028</div>
+        <div style="font-size:10px; color:var(--muted);">Asia-Pacific: <span style="color:var(--accent4)">fastest growing</span> region</div>
+      </div>
+    </div>
+
+    <!-- KEY APPROVALS / TIMELINE 2024-2025 -->
+    <div class="card">
+      <div class="card-title">Key Regulatory Events 2024–2025</div>
+      <div class="timeline">
+        <div class="timeline-item" style="--item-color:var(--accent4)">
+          <div class="timeline-date">Jan 2025</div>
+          <div class="timeline-text"><strong>Enhertu</strong> — FDA approved for HR+/HER2-ultralow metastatic breast cancer (AZ/Daiichi), massively expanding eligible population</div>
+        </div>
+        <div class="timeline-item" style="--item-color:var(--accent3)">
+          <div class="timeline-date">Jan 2025</div>
+          <div class="timeline-text"><strong>Novartis</strong> — Phase II/III next-gen CAR-T global trial launched for relapsed DLBCL</div>
+        </div>
+        <div class="timeline-item" style="--item-color:var(--accent)">
+          <div class="timeline-date">Feb 2025</div>
+          <div class="timeline-text"><strong>Adcetris (BV)</strong> + Len + R — FDA approves brentuximab vedotin combination for R/R large B-cell lymphoma</div>
+        </div>
+        <div class="timeline-item" style="--item-color:var(--accent2)">
+          <div class="timeline-date">Apr 2024</div>
+          <div class="timeline-text"><strong>Enhertu</strong> — FDA approves for HER2+ (IHC 3+) solid tumors pan-tumor (tumor-agnostic) indication</div>
+        </div>
+        <div class="timeline-item" style="--item-color:var(--accent5)">
+          <div class="timeline-date">Jun 2025</div>
+          <div class="timeline-text"><strong>Datroway</strong> — FDA accelerated approval for TROP2-ADC datopotamab deruxtecan in advanced NSCLC</div>
+        </div>
+        <div class="timeline-item" style="--item-color:#f093fb">
+          <div class="timeline-date">Dec 2025</div>
+          <div class="timeline-text"><strong>Lunsumio VELO</strong> — FDA approves subcutaneous mosunetuzumab for R/R follicular lymphoma; admin time ~1 min</div>
+        </div>
+        <div class="timeline-item" style="--item-color:#20e3b2">
+          <div class="timeline-date">2024 Total</div>
+          <div class="timeline-text"><strong>60+ oncology approvals</strong> granted by FDA in 2024, including 11 first-in-class therapeutics (AACR data)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDICATION BREAKDOWN + CHINA WATCH -->
+  <div id="indications" class="section-anchor grid" style="grid-template-columns:1fr 1fr; margin-bottom:16px;">
+
+    <!-- TOP INDICATIONS -->
+    <div class="card">
+      <div class="card-title">Top Cancer Indications by Market Share 2025</div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Lung Cancer</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:100%;background:var(--accent)"></div></div>
+        <div class="pipeline-num" style="color:var(--accent)">~37%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Breast Cancer</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:53%;background:var(--accent4)"></div></div>
+        <div class="pipeline-num" style="color:var(--accent4)">~20%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Multiple Myeloma</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:35%;background:#20e3b2"></div></div>
+        <div class="pipeline-num" style="color:#20e3b2">~13%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Colorectal</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:22%;background:var(--accent2)"></div></div>
+        <div class="pipeline-num" style="color:var(--accent2)">~8%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Prostate Cancer</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:20%;background:var(--accent5)"></div></div>
+        <div class="pipeline-num" style="color:var(--accent5)">~7%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Leukemia / CLL</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:16%;background:#f093fb"></div></div>
+        <div class="pipeline-num" style="color:#f093fb">~6%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Lymphoma</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:14%;background:#ffab76"></div></div>
+        <div class="pipeline-num" style="color:#ffab76">~5%</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label">Gastric / GI</div>
+        <div class="pipeline-track"><div class="pipeline-fill" style="width:10%;background:#b0bec5"></div></div>
+        <div class="pipeline-num" style="color:#b0bec5)">~4%</div>
+      </div>
+      <div style="margin-top:10px; font-size:10px; color:var(--muted);">
+        Double-digit spending growth projected for 7 of top 10 tumor types through 2029.
+      </div>
+    </div>
+
+    <!-- CHINA WATCH + RISK -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="card">
+        <div class="card-title">China Oncology Watch 🇨🇳</div>
+        <div style="font-size:11px; color:var(--muted); line-height:1.7;">
+          <div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:6px;">
+            <span style="color:var(--accent4); font-size:18px; line-height:1;">●</span>
+            <span>China launched <strong style="color:var(--text)">84 NAS</strong> in oncology 2020–2024, nearly matching the US (85). Up from 37 in 2015–19.</span>
+          </div>
+          <div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:6px;">
+            <span style="color:var(--accent3); font-size:18px; line-height:1;">●</span>
+            <span><strong style="color:var(--text)">45 NAS</strong> from China not yet launched in other markets — domestic-first innovation emerging.</span>
+          </div>
+          <div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:6px;">
+            <span style="color:var(--accent5); font-size:18px; line-height:1;">●</span>
+            <span><strong style="color:var(--text)">27 licensing deals</strong> between Chinese &amp; non-Chinese companies in 2024. Total: $30B in deals.</span>
+          </div>
+          <div style="display:flex;gap:6px;align-items:flex-start;">
+            <span style="color:var(--accent2); font-size:18px; line-height:1;">●</span>
+            <span>April 2025 Liberation Day tariffs (10–46%) disrupting API supply chains and trial logistics.</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="risks" class="card section-anchor">
+        <div class="card-title">Patent Cliff Risk 2026–2031</div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--danger);--deal-bg:rgba(255,71,87,0.1)">2028 US</div>
+          <div class="deal-text">Keytruda compound patent expires; Medicare pricing starts Jan 2028</div>
+          <div class="deal-val" style="color:var(--danger)">~$30B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:#ffab76;--deal-bg:rgba(255,171,118,0.1)">2026</div>
+          <div class="deal-text">Imbruvica Medicare price negotiations take effect</div>
+          <div class="deal-val" style="color:#ffab76">~$3B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--muted);--deal-bg:rgba(107,139,164,0.1)">2028–29</div>
+          <div class="deal-text">Opdivo, Revlimid biosimilar &amp; generic competition escalating</div>
+          <div class="deal-val" style="color:var(--muted)">~$10B</div>
+        </div>
+        <div class="deal-row">
+          <div class="deal-badge" style="--deal-color:var(--accent3);--deal-bg:rgba(127,255,110,0.1)">2031 EU</div>
+          <div class="deal-text">Keytruda EU compound patent expiry (Merck disclosed)</div>
+          <div class="deal-val" style="color:var(--accent3)">Protected</div>
+        </div>
+        <div style="margin-top:8px; font-size:10px; color:var(--muted);">
+          PD-1/PD-L1 biosimilar competition will slow growth across many tumors in 2028–29. Merck accelerating diversification via ADC/new pipeline assets.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <strong style="color:var(--text)">Data Sources:</strong> IQVIA Global Oncology Trends 2025 · Evaluate Pharma · Company Financial Filings (Merck, BMS, AZ, J&amp;J, Roche, Novartis, Eli Lilly, Pfizer, AbbVie) · Precedence Research · Grand View Research · Fortune Business Insights · GlobalData · BCC Research · AACR 2025 Annual Meeting · FDA Hematology/Oncology Approvals Database · Drug Discovery Trends H1 2025 · iPharmaCenter 2025 Analysis. 
+    <br>
+    <span style="margin-top:4px;display:inline-block;">Revenue figures are estimated/compiled from multiple sources and analyst projections. YoY growth rates are approximations. This dashboard is for informational purposes only.</span>
+  </footer>
+
+</div>
+</body>
+<script>
+  // Smooth scroll navigation — no page jump
+  const navItems = document.querySelectorAll('.nav-item[data-target]');
+
+  navItems.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-target');
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      // Set active
+      navItems.forEach(i => i.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Smooth scroll within page
+      const navHeight = document.getElementById('main-nav').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // Scroll spy — highlight nav as user scrolls
+  const sectionIds = ['overview','top-products','key-players','modalities','pipeline','growth','indications','risks'];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('data-target') === id) {
+            item.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+</html>
